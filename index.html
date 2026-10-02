@@ -1,50 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Christmas Letter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffd9e2">
+  <title>Um jardim para você</title>
+  <meta name="description" content="Um jardim de tulipas e costelas-de-adão, feito com carinho.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌷</text></svg>">
 </head>
 <body>
-
-  <!-- 🎥 FUNDO -->
-  <video id="bgVideo" muted loop playsinline>
-    <source src="fundorain.mp4" type="video/mp4">
-  </video>
-
-  <main id="scene">
-
-    <div class="envelope" id="envelope">
-      <div class="flap front"></div>
-      <div class="flap top"></div>
-
-      <div class="letter">
-        <div class="letter-content" id="letterContent"></div>
-        <template id="letterTemplate">
-        <h2>🎄Merry Christmas🎄</h2>
-
-        <p>
-          Even from afar,<br>
-          I want you to feel something warm 🔥 today.
-        </p>
-
-        <p>
-          May this winter ❄️ wrap you in peace,<br>
-          happy moments, and quiet joy.
-        </p>
-
-        <p>
-          I hope this little letter reaches you<br>
-          like a tight hug, <br>
-          warm, comfy, and full of meaning, little ladybug 🐞<br>
-        </p>
-        </template>
-    </div>
-
+  <div class="sky">
+    <div class="sun"></div>
+    <div class="cloud c1"></div>
+    <div class="cloud c2"></div>
+    <div class="cloud c3"></div>
   </div>
 
-</div>
+  <main id="garden" aria-label="Jardim animado de flores">
+    <svg class="ground" viewBox="0 0 1000 200" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,70 C150,30 300,60 450,45 C620,28 800,70 1000,40 L1000,200 L0,200 Z" fill="#9ccf8f"/>
+      <path d="M0,110 C200,80 380,120 560,95 C740,72 880,110 1000,90 L1000,200 L0,200 Z" fill="#7fbf74"/>
+      <path d="M0,150 C180,130 360,160 540,142 C720,125 860,150 1000,138 L1000,200 L0,200 Z" fill="#64a85c"/>
+    </svg>
+    <div id="plants"></div>
+  </main>
 
-<script src="script.js"></script>
+  <div id="fx" aria-hidden="true"></div>
+
+  <section class="card" id="card">
+    <p class="kicker">um jardim para</p>
+    <h1 id="name">você</h1>
+    <p class="msg">
+      Que a sua vida floresça sempre,<br>
+      cheia de cor, de calma e de alegria. 🌷
+    </p>
+    <p class="hint">toque na tela para plantar flores ✨</p>
+  </section>
+
+  <script src="script.js"></script>
 </body>
 </html>

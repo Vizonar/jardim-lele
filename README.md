@@ -1,11 +1,11 @@
-# 🌷 Um jardim para você
+# 🌷 Jardim da Lele
 
-Site com tulipas e costelas-de-adão animadas, feito para abrir no celular.
+Site com flores e costelas-de-adão animadas, feito para abrir no celular.
 
-- Toque na tela para plantar mais tulipas.
-- Toque no cartão para minimizá-lo.
-- Para colocar o nome da pessoa, adicione `?para=Nome` no final do link.
-  Ex.: `https://SEU-USUARIO.github.io/NOME-DO-REPO/?para=Ana`
+- O jardim começa com uma tulipa branca no meio.
+- Na barra de baixo, escolha a planta (tulipa, margarida, girassol,
+  costela-de-adão ou costela-de-eva) e a cor (ou 🎲 para cor surpresa).
+- Aperte no jardim para plantar. Toque no cartão para minimizá-lo.
 
 ## Publicar no GitHub Pages
 

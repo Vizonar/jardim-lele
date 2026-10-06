@@ -100,7 +100,18 @@ body::after {
   pointer-events: none;
 }
 
-.plant > svg {
+.bob {
+  height: 100%;
+  transform-origin: 50% 100%;
+}
+.bob.watered { animation: wiggle .9s ease-in-out; }
+@keyframes wiggle {
+  20% { transform: scale(1.05, .94); }
+  45% { transform: scale(.96, 1.06) rotate(-2deg); }
+  70% { transform: scale(1.02, .98) rotate(1.5deg); }
+}
+
+.bob > svg {
   display: block;
   height: 100%;
   width: auto;
@@ -110,8 +121,8 @@ body::after {
   transform: rotate(calc(-1 * var(--sa)));
 }
 
-.flower { aspect-ratio: 100 / 320; }
-.monstera { aspect-ratio: 320 / 420; }
+.plant .flower { aspect-ratio: 100 / 320; }
+.plant .monstera { aspect-ratio: 320 / 420; }
 
 @keyframes sway {
   from { transform: rotate(calc(-1 * var(--sa))); }
@@ -351,12 +362,23 @@ h1 {
   color: #6b2c3e;
 }
 
-.picker { gap: 6px; }
+.picker {
+  gap: 6px;
+  justify-content: flex-start;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  padding: 3px 2px 2px;
+  max-width: 900px;
+}
+.picker::-webkit-scrollbar { display: none; }
+.picker > :first-child { margin-left: auto; }
+.picker > :last-child { margin-right: auto; }
 
 .plant-btn {
-  flex: 1 1 0;
-  max-width: 100px;
-  min-width: 0;
+  flex: 0 0 auto;
+  width: 70px;
+  scroll-snap-align: center;
   padding: 6px 2px 5px;
   border: 0;
   border-radius: 14px;
@@ -366,7 +388,18 @@ h1 {
   cursor: pointer;
   transition: background .2s, transform .15s;
 }
-.plant-btn .ico { display: block; font-size: 1.5rem; line-height: 1.2; }
+.plant-btn .ico {
+  display: block;
+  height: 30px;
+  margin-bottom: 2px;
+  --d: -10s;
+}
+.plant-btn .ico svg {
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  overflow: visible;
+}
 .plant-btn .lbl { display: block; }
 .plant-btn.active {
   background: #fff;
@@ -374,6 +407,141 @@ h1 {
   box-shadow: 0 0 0 2px #ff8fab;
   transform: translateY(-2px);
 }
+
+/* ===== AÇÕES DO CARTÃO ===== */
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+.actions button {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .8);
+  box-shadow: 0 1px 4px rgba(150, 60, 90, .2);
+  font-size: 17px;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform .15s, box-shadow .2s;
+}
+.actions button:active { transform: scale(.9); }
+.actions button.on {
+  box-shadow: 0 0 0 2px #c2185b, 0 0 12px rgba(194, 24, 91, .4);
+  animation: beat 1s ease-in-out infinite;
+}
+@keyframes beat { 50% { transform: scale(1.08); } }
+.card.mini .actions { margin-top: 6px; }
+
+.color-name.wide { min-width: 0; padding: 6px 0; }
+
+#toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--bar, 120px) + 16px);
+  z-index: 500;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: rgba(60, 30, 45, .82);
+  color: #fff;
+  font-size: .9rem;
+  transform: translate(-50%, 20px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s, transform .3s;
+}
+#toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* ===== REGADOR ===== */
+.can {
+  position: absolute;
+  width: 54px;
+  margin: -70px 0 0 -40px;
+  transform-origin: 30% 80%;
+  animation: pour 1.6s ease-in-out forwards;
+}
+.can svg { width: 100%; height: auto; display: block; }
+@keyframes pour {
+  0%   { opacity: 0; transform: translateY(-10px) rotate(0); }
+  15%  { opacity: 1; transform: translateY(0) rotate(0); }
+  35%, 75% { transform: rotate(28deg); opacity: 1; }
+  100% { transform: rotate(0); opacity: 0; }
+}
+.drop {
+  position: absolute;
+  width: 5px;
+  height: 8px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background: #6ec3f4;
+  opacity: 0;
+  animation: drip .6s ease-in forwards;
+}
+@keyframes drip {
+  0%   { opacity: 0; transform: translateY(0); }
+  20%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(var(--fall)); }
+}
+
+/* ===== NOITE ===== */
+.moon, #stars, #nightShade { display: none; }
+
+#stars { position: absolute; inset: 0; }
+#stars i {
+  position: absolute;
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  background: #fff;
+  animation: twinkle var(--t) ease-in-out var(--d) infinite alternate;
+}
+@keyframes twinkle { from { opacity: .2; } to { opacity: 1; } }
+
+.moon {
+  position: absolute;
+  top: 10%;
+  right: 14%;
+  width: min(18vw, 16vh);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fffdf2, #f4ecc8 70%);
+  box-shadow: 0 0 40px 10px rgba(255, 250, 220, .35), 0 0 120px 40px rgba(200, 200, 255, .15);
+}
+.moon::before, .moon::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(200, 190, 150, .35);
+}
+.moon::before { width: 22%; height: 22%; top: 25%; left: 50%; }
+.moon::after  { width: 14%; height: 14%; top: 58%; left: 30%; }
+
+body.night .sky {
+  background: linear-gradient(180deg, #141b3c 0%, #2b2f6b 45%, #5a4a8a 80%, #7a5f8f 100%);
+}
+body.night .sun { display: none; }
+body.night .moon, body.night #stars { display: block; }
+body.night .cloud { opacity: .15 !important; }
+body.night #nightShade {
+  display: block;
+  position: fixed;
+  inset: 0;
+  background: rgba(25, 25, 70, .32);
+  pointer-events: none;
+}
+body.night .firefly { box-shadow: 0 0 14px 5px rgba(255, 245, 170, .9); }
+body.night .card {
+  background: rgba(40, 35, 80, .5);
+  border-color: rgba(255, 255, 255, .25);
+  color: #f3e6ff;
+}
+body.night h1 { color: #ffb3d1; }
+body.night::after { background: #3d6b45; }
+body.night .toolbar { background: rgba(50, 45, 90, .65); border-color: rgba(255,255,255,.2); }
+body.night .plant-btn { background: rgba(255, 255, 255, .18); color: #efe6ff; }
+body.night .plant-btn.active { background: #fff; color: #c2185b; }
+body.night .color-name { color: #f3e6ff; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

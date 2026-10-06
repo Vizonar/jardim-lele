@@ -9,12 +9,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="style.css?v=4">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌷</text></svg>">
 </head>
 <body>
   <div class="sky">
+    <div id="stars"></div>
     <div class="sun"></div>
+    <div class="moon"></div>
     <div class="cloud c1"></div>
     <div class="cloud c2"></div>
     <div class="cloud c3"></div>
@@ -29,19 +31,29 @@
     <div id="plants"></div>
   </main>
 
+  <div id="nightShade" aria-hidden="true"></div>
   <div id="fx" aria-hidden="true"></div>
 
   <section class="card" id="card">
     <p class="kicker">bem-vindo ao</p>
     <h1>Jardim da Lele</h1>
     <p class="hint">aperte no jardim para plantar 🌱</p>
+    <div class="actions">
+      <button type="button" id="btnUndo" title="Desfazer" aria-label="Desfazer a última planta">↩️</button>
+      <button type="button" id="btnClear" title="Começar de novo" aria-label="Começar o jardim de novo">🗑️</button>
+      <button type="button" id="btnPhoto" title="Foto do jardim" aria-label="Tirar foto do jardim">📷</button>
+      <button type="button" id="btnMusic" title="Música" aria-label="Ligar ou desligar a música">🎵</button>
+      <button type="button" id="btnNight" title="Dia / noite" aria-label="Trocar entre dia e noite">🌙</button>
+    </div>
   </section>
+
+  <div id="toast" role="status" aria-live="polite"></div>
 
   <nav class="toolbar" id="toolbar" aria-label="Escolha a planta e a cor">
     <div class="colors" id="colors"></div>
     <div class="picker" id="picker"></div>
   </nav>
 
-  <script src="script.js?v=3"></script>
+  <script src="script.js?v=4"></script>
 </body>
 </html>
